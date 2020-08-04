@@ -141,7 +141,7 @@ namespace Texteditor
             //проверяем наличие папок по указанному пути 
             if (dir.GetDirectories().Length > 0)
             {
-                foreach (var item in dir.GetDirectories())
+                foreach (var item in dir.GetDirectories().OrderBy(f=>f.Name))
                 {
                     Console.WriteLine("\t -" + item.Name + "_" + counter);
                     counter++;
@@ -169,7 +169,7 @@ namespace Texteditor
                         {
                             Console.WriteLine("\t\tSelect name file: \n");
 
-                            foreach (FileInfo s in fi1)
+                            foreach (FileInfo s in fi1.OrderBy(f=>f.Name))
                             {
                                 //Выводим на консоль список файлов в текущей папке
                                 Console.WriteLine("\t" + s);
@@ -362,7 +362,7 @@ namespace Texteditor
             Console.WriteLine("\n\tTo work with text, the application provides the following methods:");
             Console.WriteLine("\n\t1 - FindAndDeleteWord;\n\t2 - ItemWord;\n\t3 - ReverseWord;\n\t4 - GetDirectory;\n\t5 - File_info;\n\t");
             Console.WriteLine("\n\tTo start the application, specify the method index:");
-            //string number=Console.ReadLine();
+
             //Объявляем переменную
             ConsoleKeyInfo keypress;
             do
@@ -385,8 +385,9 @@ namespace Texteditor
                             break;
                         case 4:
                             Console.WriteLine("\n\tThe method named GetDirectory works\n\tSpecify the path:");
-                            //GetDirectory(Console.ReadLine());
-                            GetDirectory(@"D:\EditFile\EditFile\EditFile");
+                            GetDirectory(Console.ReadLine());
+                            //Использовал для отладки
+                            //GetDirectory(@"D:\EditFile\EditFile\EditFile");
                             break;
                         case 5:
                             Console.WriteLine("\n\tThe method named File_info works\n");
