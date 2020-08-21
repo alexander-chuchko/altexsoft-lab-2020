@@ -42,8 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Counter.cs" />
+    <Compile Include="Delete.cs" />
+    <Compile Include="OpenDirectory.cs" />
+    <Compile Include="PrintInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
