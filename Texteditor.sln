@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texteditor", "Texteditor\Texteditor.csproj", "{26A56764-042E-4D84-ADE3-ED0276A357DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookOfRecipes", "..\..\..\AlexSoft\Hometask\Bookofrecipes\BookOfRecipes\BookOfRecipes\BookOfRecipes.csproj", "{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookOfRecipes", "BookOfRecipes\BookOfRecipes.csproj", "{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
