@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Counter.cs" />
     <Compile Include="Delete.cs" />
+    <Compile Include="FileOperation.cs" />
     <Compile Include="OpenDirectory.cs" />
     <Compile Include="PrintInformation.cs" />
     <Compile Include="Program.cs" />

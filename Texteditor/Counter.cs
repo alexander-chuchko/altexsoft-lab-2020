@@ -8,17 +8,23 @@ using System.Threading.Tasks;
 
 namespace Texteditor
 {
-    class Counter
+    class Counter : FileOperation
     {
-        //Метод для подсчитывания слов  ---Выполнен---
-        public static void ItemWord(string path)
+        //Конструктор класса 
+        public Counter(string path)
         {
-            FileInfo fileInf = new FileInfo(path);
+            this.path = path;
+            this.fileInfo = new FileInfo(path);
+        }
+
+        //Метод для подсчитывания слов  ---Выполнен---
+        public void ItemWord(Counter obj)
+        {
             //Выполняем проверку на наличие файла по указаному пути
-            if (fileInf.Exists)
+            if (obj.ExistenceСheckFile())
             {
                 //Артикль это служебное слово
-                string text = File.ReadAllText(path);
+                string text = obj.ReadFile();
                 //Создаем экземпляр класса Regex 
                 Regex TitleRegex = new Regex(@"[^\'\w\s]", RegexOptions.IgnoreCase);
                 //Создаем массив строк

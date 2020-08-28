@@ -8,19 +8,24 @@ using System.Threading.Tasks;
 
 namespace Texteditor
 {
-    class Revers
+    class Revers:FileOperation
     {
-        //Метод выполняющий реверсирование слов в 3-м предложении  ---Выполнен---
-        public static void ReverseWord(string path)
+        //Конструктор класса 
+        public Revers(string path)
         {
-            FileInfo fileInf = new FileInfo(path);
+            this.path = path;
+            this.fileInfo = new FileInfo(path);
+        }
+        //Метод выполняющий реверсирование слов в 3-м предложении  ---Выполнен---
+        public void ReverseWord(Revers obj)
+        {
             //Выполняем проверку на наличие файла по указаному пути
-            if (fileInf.Exists)
+            if (obj.ExistenceСheckFile())
             {
                 //Индекс 3-го предложения. Согласно условию задания  
                 int index = 2;
                 //Заносим в переменную text - текст прочитанный из файла 
-                string text = File.ReadAllText(path);
+                string text = obj.ReadFile();
                 //Получаем массив с предложениями 
                 string[] allStrings = text.Split(new string[] { ".", "?", "!" }, StringSplitOptions.RemoveEmptyEntries);
                 //Получаем массив со словами с 3-го предложения

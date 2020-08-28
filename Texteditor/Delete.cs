@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Texteditor
 {
-    class Delete
+    class Delete:FileOperation
     {
+        //Конструктор класса 
+        public Delete(string path)
+        {
+            this.path = path;
+            this.fileInfo = new FileInfo(path);
+        }
         //Метод для изменения имени файла (добавления суффикса _copy)
         private static string Add_Path_Copy(string path)
         {
@@ -19,18 +25,17 @@ namespace Texteditor
             return path_new_file;
         }
         //Метод для поиска и удаления слова/символа
-        public static void FindAndDeleteWord(string path, string parametr)
+        public void FindAndDeleteWord(Delete obj, string parametr)
         {
-
             //Создаем экземпляр класса FileInfo
-            FileInfo fileInf = new FileInfo(path);
+            //FileInfo fileInf = new FileInfo(path);
             //Проверяем существ. ли файл по указанному пути
-            if (fileInf.Exists)
+            if (obj.ExistenceСheckFile())
             {
                 try
                 {
                     //Выполняем копию файла с суффиксом "copy" по тому же пути с помощью метода Copy
-                    File.Copy(path, Add_Path_Copy(path), true);
+                    File.Copy(obj.path, Add_Path_Copy(obj.path), true);
                     Console.WriteLine("\tFile copy was successful!\n");
                     Console.WriteLine();
                 }
@@ -47,7 +52,7 @@ namespace Texteditor
                 return;
             }
             //Выполняем считывание файла в переменную
-            string text = File.ReadAllText(path);
+            string text = obj.ReadFile(); //File.ReadAllText(path);
             //Выполняем проверку в параметр метода parametr передано слово или символ
 
             //const string pattern = "up";
@@ -65,7 +70,7 @@ namespace Texteditor
                     {
                         //Вместо удаленного символа/слова установим at (@) для читабельности при проверке текста
                         newText = regex.Replace(text, "@", myMatches.Count, nextMatch.Index);
-                        File.WriteAllText(path, newText);
+                        File.WriteAllText(obj.path, newText);
                         check = false;
                         Console.WriteLine("\n\t\tMatches in the text: " + myMatches.Count);
                     }
