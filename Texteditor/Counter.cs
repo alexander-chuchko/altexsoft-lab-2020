@@ -17,29 +17,29 @@ namespace Texteditor
             this.fileInfo = new FileInfo(path);
         }
 
-        //Метод для подсчитывания слов  ---Выполнен---
-        public void ItemWord(Counter obj)
+        //Метод для подсчитывания слов  ---Выполнен--
+        public void CountingWords()
         {
             //Выполняем проверку на наличие файла по указаному пути
-            if (obj.IsExistenceСheckFile())
+            if (IsExistenceСheckFile())
             {
                 //Артикль это служебное слово
-                string text = obj.ReadFile();
+                string text = ReadFile();
                 //Создаем экземпляр класса Regex 
-                Regex TitleRegex = new Regex(@"[^\'\w\s]", RegexOptions.IgnoreCase);
+                Regex titleRegex = new Regex(@"[^\'\w\s]", RegexOptions.IgnoreCase);
                 //Создаем массив строк
-                string[] allstrings = Regex.Split(TitleRegex.Replace(text, string.Empty), @"\s+");
-                Console.WriteLine("\n\tNumber of words in the text: " + allstrings.Length + "\n");
+                string[] allStrings = Regex.Split(titleRegex.Replace(text, string.Empty), @"\s+");
+                Console.WriteLine("\n\tNumber of words in the text: " + allStrings.Length + "\n");
                 //Счетчик
                 int count = 1;
                 //Номер выводимого слова из текста
                 int wordNumber = 10;
-                string[] everyTenthWord = new string[(int)(allstrings.Length / wordNumber)];
-                for (int i = 0, j = 0; i < allstrings.Length; i++)
+                string[] everyTenthWord = new string[(int)(allStrings.Length / wordNumber)];
+                for (int i = 0, j = 0; i < allStrings.Length; i++)
                 {
                     if (count % wordNumber == 0 && i != 0)
                     {
-                        everyTenthWord[j] = allstrings[i];
+                        everyTenthWord[j] = allStrings[i];
                         count = 0;
                         j++;
                     }

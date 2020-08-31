@@ -18,7 +18,7 @@ namespace TextEditor
             int numberOfMethods = 5;
             Console.WriteLine("\n\t\t\t\t\tApplication for working with text");
             Console.WriteLine("\n\tTo work with text, the application provides the following methods:");
-            Console.WriteLine("\n\t1 - FindAndDeleteWord;\n\t2 - ItemWord;\n\t3 - ReverseWord;\n\t4 - GetDirectory;\n\t5 - File_info;\n\t");
+            Console.WriteLine("\n\t1 - FindAndDeleteWord;\n\t2 - CountingWords;\n\t3 - ReverseWord;\n\t4 - GetDirectory;\n\t5 - FileInfo;\n\t");
             Console.WriteLine("\n\tTo start the application, specify the method index:");
 
             //Объявляем переменную
@@ -33,19 +33,19 @@ namespace TextEditor
                             PathUser.ValidationValue();
                             Console.WriteLine("\n\tThe method named FindAndDeleteWord works\n\tSpecify parameter (character / word)\n");
                             FileOperation delete = new FileOperation(PathUser.path);
-                            delete.FindAndDeleteWord(delete, Console.ReadLine());
+                            delete.FindAndDeleteWord(Console.ReadLine());
                             break;
                         case 2:
                             PathUser.ValidationValue();
-                            Console.WriteLine("\n\tThe method named ItemWord works\n");
+                            Console.WriteLine("\n\tThe method named CountingWords works\n");
                             Counter counter = new Counter(PathUser.path);
-                            counter.ItemWord(counter);
+                            counter.CountingWords();
                             break;
                         case 3:
                             PathUser.ValidationValue();
-                            Console.WriteLine("\n\tThe method named ReverseWord works\n");
+                            Console.WriteLine("\n\tThe method named WordReversal works\n");
                             Revers revers = new Revers(PathUser.path);
-                            revers.ReverseWord(revers);
+                            revers.WordReversal();
                             break;
                         case 4:
                             Console.WriteLine("\n\tThe method named GetDirectory works\n\tSpecify the path:");
@@ -55,7 +55,7 @@ namespace TextEditor
                             PathUser.ValidationValue();
                             Console.WriteLine("\n\tThe method named File_info worksn\n\tSpecify the path: ");
                             InformationPrint printInformation = new InformationPrint(PathUser.path);
-                            printInformation.File_info(printInformation);
+                            printInformation.FileInfo();
                             break;
                         default:
                             Console.WriteLine("Invalid value specified!");

@@ -15,17 +15,16 @@ namespace Texteditor
             this.fileInfo = new FileInfo(path);
         }
         //Метод для получения информации о файле
-        public void File_info(InformationPrint obj)
+        public void FileInfo()
         {
-            //FileInfo fileInf = new FileInfo(path);
             //Выполняем проверку на наличие файла по указаному пути
-            if (obj.IsExistenceСheckFile())
+            if (IsExistenceСheckFile())
             {
                 //Console.WriteLine();
-                Console.WriteLine("\tFile name: {0}", obj.fileInfo.Name);
-                Console.WriteLine("\tTime of creation: {0}", obj.fileInfo.CreationTime);
-                Console.WriteLine("\tSize: {0}", obj.fileInfo.Length);
-                Console.WriteLine("\tBinary path: {0}", obj.fileInfo.FullName);
+                Console.WriteLine("\tFile name: {0}", fileInfo.Name);
+                Console.WriteLine("\tTime of creation: {0}", fileInfo.CreationTime);
+                Console.WriteLine("\tSize: {0}", fileInfo.Length);
+                Console.WriteLine("\tBinary path: {0}", fileInfo.FullName);
                 Console.WriteLine();
             }
             else

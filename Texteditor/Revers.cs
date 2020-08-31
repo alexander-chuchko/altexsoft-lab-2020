@@ -17,15 +17,15 @@ namespace Texteditor
             this.fileInfo = new FileInfo(path);
         }
         //Метод выполняющий реверсирование слов в 3-м предложении  ---Выполнен---
-        public void ReverseWord(Revers obj)
+        public void WordReversal()
         {
             //Выполняем проверку на наличие файла по указаному пути
-            if (obj.IsExistenceСheckFile())
+            if (IsExistenceСheckFile())
             {
                 //Индекс 3-го предложения. Согласно условию задания  
                 int index = 2;
                 //Заносим в переменную text - текст прочитанный из файла 
-                string text = obj.ReadFile();
+                string text = ReadFile();
                 //Получаем массив с предложениями 
                 string[] allStrings = text.Split(new string[] { ".", "?", "!" }, StringSplitOptions.RemoveEmptyEntries);
                 //Получаем массив со словами с 3-го предложения

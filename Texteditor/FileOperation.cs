@@ -17,23 +17,23 @@ namespace Texteditor
             this.fileInfo = new FileInfo(path);
         }
         //Метод для изменения имени файла (добавления суффикса _copy)
-        private static string Add_Path_Copy(string path)
+        private static string AddPathCopy(string path)
         {
-            string path_new_file;
+            string pathNewFile;
             string add_copy = "_copy";
-            path_new_file = @Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + add_copy + Path.GetExtension(path);
-            return path_new_file;
+            pathNewFile = @Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + add_copy + Path.GetExtension(path);
+            return pathNewFile;
         }
         //Метод для поиска и удаления слова/символа
-        public void FindAndDeleteWord(FileOperation obj, string parametr)
+        public void FindAndDeleteWord(string parametr)
         {
             //Проверяем существ. ли файл по указанному пути
-            if (obj.IsExistenceСheckFile())
+            if (IsExistenceСheckFile())
             {
                 try
                 {
                     //Выполняем копию файла с суффиксом "copy" по тому же пути с помощью метода Copy
-                    File.Copy(obj.path, Add_Path_Copy(obj.path), true);
+                    File.Copy(path, AddPathCopy(path), true);
                     Console.WriteLine("\tFile copy was successful!\n");
                     Console.WriteLine();
                 }
@@ -50,7 +50,7 @@ namespace Texteditor
                 return;
             }
             //Выполняем считывание файла в переменную
-            string text = obj.ReadFile(); //File.ReadAllText(path);
+            string text = ReadFile(); //File.ReadAllText(path);
             //Выполняем проверку в параметр метода parametr передано слово или символ
 
             //const string pattern = "up";
@@ -68,7 +68,7 @@ namespace Texteditor
                     {
                         //Вместо удаленного символа/слова установим at (@) для читабельности при проверке текста
                         newText = regex.Replace(text, "@", myMatches.Count, nextMatch.Index);
-                        File.WriteAllText(obj.path, newText);
+                        File.WriteAllText(path, newText);
                         check = false;
                         Console.WriteLine("\n\t\tMatches in the text: " + myMatches.Count);
                     }

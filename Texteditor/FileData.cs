@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Texteditor
 {
     //Создаем базовый класс в который заносим повторяющийся код. Согласно замечаний
-    public class FileData
+    public abstract class FileData
     {
         protected FileInfo fileInfo { get; set; }
         protected string path { get; set; }
