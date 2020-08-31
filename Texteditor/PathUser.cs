@@ -13,7 +13,7 @@ namespace Texteditor
         //Выполняем проверку в случае, если пользовтаель захотел использовать следующие методы
         public static void ValidationValue()
         {
-            if (path == null || path == string.Empty)
+            if (string.IsNullOrEmpty(path))
             {
                 Console.WriteLine("\tEnter file address:\n");
                 path = Console.ReadLine().Trim('"');
