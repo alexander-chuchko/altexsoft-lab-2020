@@ -17,10 +17,10 @@ namespace Texteditor
             this.fileInfo = new FileInfo(path);
         }
         //Метод выполняющий реверсирование слов в 3-м предложении  ---Выполнен---
-        public void WordReversal()
+        public void ReverseWords()
         {
             //Выполняем проверку на наличие файла по указаному пути
-            if (IsExistenceСheckFile())
+            if (IsExistenceFile())
             {
                 //Индекс 3-го предложения. Согласно условию задания  
                 int index = 2;

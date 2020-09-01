@@ -18,7 +18,7 @@ namespace Texteditor
             DirectoryInfo dir = new DirectoryInfo(path);
             if (dir.Exists)
             {
-                DirectoryInfo[] astFolders = dir.GetDirectories();//Directory.GetDirectories(path);
+                DirectoryInfo[] astFolders = dir.GetDirectories();
                 //проверяем наличие папок по указанному пути 
                 if (astFolders.Length > 0)
                 {
@@ -47,10 +47,10 @@ namespace Texteditor
                         if (astFolders[result].GetFiles().Length > 0)
                         {
                             Console.WriteLine("\t\tSelect name file: \n");
-                            foreach (FileInfo s in astFolders[result].GetFiles().OrderBy(f => f.Name))
+                            foreach (FileInfo file in astFolders[result].GetFiles().OrderBy(f => f.Name))
                             {
                                 //Выводим на консоль список файлов в текущей папке
-                                Console.WriteLine("\t" + s);
+                                Console.WriteLine("\t" + file);
                             }
                         }
                         else

@@ -20,15 +20,15 @@ namespace Texteditor
         private static string AddPathCopy(string path)
         {
             string pathNewFile;
-            string add_copy = "_copy";
-            pathNewFile = @Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + add_copy + Path.GetExtension(path);
+            string word = "_copy";
+            pathNewFile = @Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + word + Path.GetExtension(path);
             return pathNewFile;
         }
         //Метод для поиска и удаления слова/символа
         public void FindAndDeleteWord(string parametr)
         {
             //Проверяем существ. ли файл по указанному пути
-            if (IsExistenceСheckFile())
+            if (IsExistenceFile())
             {
                 try
                 {

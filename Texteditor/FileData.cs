@@ -14,7 +14,7 @@ namespace Texteditor
         protected string path { get; set; }
 
         //Метод для проверки существования файлов
-        public bool IsExistenceСheckFile()
+        public bool IsExistenceFile()
         {
             return fileInfo.Exists;
         }

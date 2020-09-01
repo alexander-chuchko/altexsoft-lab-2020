@@ -21,7 +21,7 @@ namespace Texteditor
         public void CountingWords()
         {
             //Выполняем проверку на наличие файла по указаному пути
-            if (IsExistenceСheckFile())
+            if (IsExistenceFile())
             {
                 //Артикль это служебное слово
                 string text = ReadFile();

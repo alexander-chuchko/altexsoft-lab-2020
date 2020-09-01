@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Texteditor
 {
-    class InformationPrint : FileData
+    class Information : FileData
     {
-        public InformationPrint(string path)
+        public Information(string path)
         {
             this.path = path;
             this.fileInfo = new FileInfo(path);
         }
         //Метод для получения информации о файле
-        public void FileInfo()
+        public void GettingFileParameters()
         {
             //Выполняем проверку на наличие файла по указаному пути
-            if (IsExistenceСheckFile())
+            if (IsExistenceFile())
             {
                 //Console.WriteLine();
                 Console.WriteLine("\tFile name: {0}", fileInfo.Name);

@@ -18,7 +18,7 @@ namespace TextEditor
             int numberOfMethods = 5;
             Console.WriteLine("\n\t\t\t\t\tApplication for working with text");
             Console.WriteLine("\n\tTo work with text, the application provides the following methods:");
-            Console.WriteLine("\n\t1 - FindAndDeleteWord;\n\t2 - CountingWords;\n\t3 - ReverseWord;\n\t4 - GetDirectory;\n\t5 - FileInfo;\n\t");
+            Console.WriteLine("\n\t1 - FindAndDeleteWord;\n\t2 - CountingWords;\n\t3 - ReverseWord;\n\t4 - GetDirectory;\n\t5 - GettingFileParameters;\n\t");
             Console.WriteLine("\n\tTo start the application, specify the method index:");
 
             //Объявляем переменную
@@ -45,7 +45,7 @@ namespace TextEditor
                             PathUser.ValidationValue();
                             Console.WriteLine("\n\tThe method named WordReversal works\n");
                             Revers revers = new Revers(PathUser.path);
-                            revers.WordReversal();
+                            revers.ReverseWords();
                             break;
                         case 4:
                             Console.WriteLine("\n\tThe method named GetDirectory works\n\tSpecify the path:");
@@ -54,8 +54,8 @@ namespace TextEditor
                         case 5:
                             PathUser.ValidationValue();
                             Console.WriteLine("\n\tThe method named File_info worksn\n\tSpecify the path: ");
-                            InformationPrint printInformation = new InformationPrint(PathUser.path);
-                            printInformation.FileInfo();
+                            Information printInformation = new Information(PathUser.path);
+                            printInformation.GettingFileParameters();
                             break;
                         default:
                             Console.WriteLine("Invalid value specified!");
