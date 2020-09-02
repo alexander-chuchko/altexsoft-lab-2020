@@ -1,18 +1,25 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 4.0.0.6842
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookOfRecipes", "BookOfRecipes\BookOfRecipes.csproj", "{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1231
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookOfRecipes", "BookOfRecipes\BookOfRecipes.csproj", "{AE7166EC-8C80-44E8-B89F-69359DC70617}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}.Debug|x86.Build.0 = Debug|x86
-		{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}.Debug|x86.ActiveCfg = Debug|x86
-		{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}.Release|x86.Build.0 = Release|x86
-		{A2D5C654-0536-4AEF-9DBD-E92BBBB45569}.Release|x86.ActiveCfg = Release|x86
+		{AE7166EC-8C80-44E8-B89F-69359DC70617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE7166EC-8C80-44E8-B89F-69359DC70617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE7166EC-8C80-44E8-B89F-69359DC70617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE7166EC-8C80-44E8-B89F-69359DC70617}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2654C26-2114-4904-905A-FC1A3B85CCC4}
 	EndGlobalSection
 EndGlobal
