@@ -2,33 +2,43 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
-using System.Reflection;
-using BookOfRecipes;
 
-static class CategoryController
+namespace BookOfRecipes
+{
+    class CategoryController
     {
+        //Метод для добавления списка категорий
         public static List<ModelCategory> CreateCategories()
         {
-            string[] nameCat = { "блюда из лаваша", "мясные блюда", "фруктово-ягодные блюда", "творожные блюда", "овощные блюда" };
-            List<ModelCategory> categories = new List<ModelCategory>(nameCat.Length);
-            for (int i = 0; i < nameCat.Length; i++)
+            string[] listСategories = { "блюда из лаваша", "мясные блюда", "фруктово-ягодные блюда", "творожные блюда", "овощные блюда" };
+            List<ModelCategory> categories = new List<ModelCategory>(listСategories.Length);
+            for (int i = 0; i < listСategories.Length; i++)
             {
-                categories.Add(new ModelCategory { id = i + 1, nameCategory = nameCat[i] });
+                categories.Add(new ModelCategory { Id = i + 1, NameCategory = listСategories[i] });
             }
             return categories;
         }
+        //Метод для добавления категории
+        public static ModelCategory CreateCategory(List<ModelCategory> modelCategories)
+        {
+            ModelCategory modelCategory = null;
+            Console.WriteLine("\n\tВведите название категории:\n");
+            string input = Console.ReadLine();
+            if(!modelCategories.Exists(x=>x.NameCategory==input&&string.IsNullOrEmpty(input)))
+            {
+                modelCategory = new ModelCategory() { NameCategory = input, Id = modelCategories.Count };
+            }
+            return modelCategory;
+        }
 
         //Метод получения выбранного индекса каталога пользователем
-        public static int CheckingCategoryIndex()
+        public static int CheckingCategoryIndex(UnitOfWork unitOfWork)
         {
             Console.WriteLine("\n\tВыбирите номер категории");
-            for (int i = 0; i < SaveList.categorySheet.Count; i++)
+            for (int i = 0; i < unitOfWork.contextEntity.CategorySheet.Count; i++)
             {
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out int result) && SaveList.categorySheet.Count >= result && SaveList.categorySheet.Count > 0)
+                if (int.TryParse(input, out int result) && unitOfWork.contextEntity.CategorySheet.Count >= result && unitOfWork.contextEntity.CategorySheet.Count > 0)
                 {
                     return result;
                 }
@@ -42,4 +52,4 @@ static class CategoryController
             return 0;
         }
     }
-
+}

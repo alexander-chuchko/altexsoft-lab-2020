@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
-using System.Reflection;
 
-
-
-    //[Serializable]
-    class ModelCategory
+namespace BookOfRecipes
+{
+    [Serializable]
+    class ModelCategory: EntityBase
     {
-        public int id { get; set; }
-        public string nameCategory { get; set; }
+        public string NameCategory { get; set; }
     }
-
+}

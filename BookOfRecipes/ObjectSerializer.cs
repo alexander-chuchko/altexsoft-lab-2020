@@ -5,10 +5,10 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Runtime.Serialization;
-using System.Reflection;
 
-
-class ObjectSerializer<T>
+namespace BookOfRecipes
+{
+    class ObjectSerializer<T>
     {
         //Метод выполняющий сериализацию объектов в json файл
         public void SerializingFile(List<T> informationFile, string path)
@@ -20,4 +20,4 @@ class ObjectSerializer<T>
             }
         }
     }
-
+}

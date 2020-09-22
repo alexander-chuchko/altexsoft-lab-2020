@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
 using System.Reflection;
-using BookOfRecipes;
+using System.Threading;
 
-static class CatalogFiles
+namespace BookOfRecipes
+{
+    class CatalogFiles
     {
         //Метод для проверки наличия файлов и в случае их отсутствия создать
-        public static void HandlingFile()
+        public static void HandlingFile(UnitOfWork unitOfWork)
         {
+            Console.WriteLine("\n\t\t\tВыполняется загрузка книги...\n");
+            Thread.Sleep(3000);
             string[] allFile = { "categoty.json", "ingridient.json", "recept.json" };
-
             foreach (string nameFile in allFile)
             {
                 string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + nameFile;
@@ -25,17 +25,26 @@ static class CatalogFiles
                     switch (nameFile)
                     {
                         case "categoty.json":
+                            Console.WriteLine("\n\tВыполняется загрузка существующего списка категорий...\n");
+                            Thread.Sleep(1000);
                             ObjectDeserializer<ModelCategory> categoryDetails = new ObjectDeserializer<ModelCategory>();
-                            SaveList.categorySheet = categoryDetails.DeserializingFile(path);
+                            unitOfWork.contextEntity.CategorySheet = categoryDetails.DeserializingFile(path);
+                            Console.WriteLine("\n\tСписок категорий загружен.");
+                            Console.WriteLine();
                             break;
                         case "recept.json":
+                            Console.WriteLine("\n\tВыполняется загрузка существующего списка рецептов...\n");
+                            Thread.Sleep(1000);
                             ObjectDeserializer<ModelRecipe> recipeDetails = new ObjectDeserializer<ModelRecipe>();
-                            SaveList.recipeSheet = recipeDetails.DeserializingFile(path);
-                            SaveList.pathRecipe = path;
+                            unitOfWork.contextEntity.RecipeSheet= recipeDetails.DeserializingFile(path);
+                            Console.WriteLine("\n\tСписок рецептов загружен.\n");
                             break;
                         case "ingridient.json":
+                            Console.WriteLine("\n\tВыполняется загрузка существующего списка ингредиентов...\n");
+                            Thread.Sleep(1000);
                             ObjectDeserializer<ModelIngredient> ingredientDetails = new ObjectDeserializer<ModelIngredient>();
-                            SaveList.ingredientSheet = ingredientDetails.DeserializingFile(path);
+                            unitOfWork.contextEntity.IngredientSheet= ingredientDetails.DeserializingFile(path);
+                            Console.WriteLine("\n\tСписок ингредиентов загружен.\n");
                             break;
                     }
                 }
@@ -44,25 +53,24 @@ static class CatalogFiles
                     switch (nameFile)
                     {
                         case "categoty.json":
-                            SaveList.categorySheet = CategoryController.CreateCategories();
-                            ObjectSerializer<ModelCategory> categoryDetails = new ObjectSerializer<ModelCategory>();
-                            categoryDetails.SerializingFile(SaveList.categorySheet, path);
+                            Console.WriteLine("\n\tВ книге нет категорий. Выполняется автоматическое добавление списка категорий...\n");
+                            Thread.Sleep(1000);
+                            unitOfWork.repositoryCategory.AddRange(CategoryController.CreateCategories());
+                            Console.WriteLine("\n\tСписок категорий добавлен и готов к использованию.\n");
                             break;
                         case "recept.json":
                             Console.WriteLine("\n\tВ книге нет рецептов. Приступаем к созданию рецептов!\n");
-                            SaveList.recipeSheet = ReceptController.CreateRecipe();
-                            ObjectSerializer<ModelRecipe> receptDetails = new ObjectSerializer<ModelRecipe>();
-                            receptDetails.SerializingFile(SaveList.recipeSheet, path);
-                            SaveList.pathRecipe = path;
+                            unitOfWork.repositoryReciipe.AddRange(ReceptController.CreateRecipe(unitOfWork));
                             break;
                         case "ingridient.json":
-                            SaveList.ingredientSheet = IngredientController.CreateIngredient();
-                            ObjectSerializer<ModelIngredient> ingredientDetails = new ObjectSerializer<ModelIngredient>();
-                            ingredientDetails.SerializingFile(SaveList.ingredientSheet, path);
+                            Console.WriteLine("\n\tВ книге нет ингредиентов. Выполняется автоматическое добавление списка ингредиентов...\n");
+                            Thread.Sleep(1000);
+                            unitOfWork.repositoryIngredient.AddRange(IngredientController.CreateIngredients());
+                            Console.WriteLine("\n\tСписок ингредиентов добавлен и готов к использованию.\n");
                             break;
                     }
                 }
             }
         }
     }
-
+}

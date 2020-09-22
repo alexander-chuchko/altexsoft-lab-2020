@@ -5,9 +5,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Runtime.Serialization;
-using System.Reflection;
 
-
+namespace BookOfRecipes
+{
     class ObjectDeserializer<T>
     {
         //Метод выполняющий десериализацию файлов
@@ -22,4 +22,4 @@ using System.Reflection;
             return informationFile;
         }
     }
-
+}

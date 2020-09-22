@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
-using System.Reflection;
-using BookOfRecipes;
 
-static class ReceptController
+namespace BookOfRecipes
+{
+    class ReceptController
     {
         public static string AddName()
         {
@@ -68,44 +65,56 @@ static class ReceptController
                 return userMessage;
             }
         }
-
+        //Метод для генерирования id-ков. В случае если есть в файле записи, то находим последний id-к
+        public static int AddId(List<ModelRecipe> modelRecipes)
+        {
+            if(modelRecipes.Count>0)
+            {
+                //В файле не может быть повторяющихся id-ков
+                return modelRecipes.Count+1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
         //Метод для добавления рецептов. Рецепты добавляет пользователь на основании созданных категорий и ингридиентов
-        public static List<ModelRecipe> CreateRecipe()
+        public static List<ModelRecipe> CreateRecipe(UnitOfWork unitOfWork)
         {
             List<ModelRecipe> listModelRecipes = new List<ModelRecipe>();
-            ConsoleKeyInfo keypress;
+            ConsoleKeyInfo keyPress;
             do
             {
-                //Environment.Exit(0);
-
                 //Создаем экземпляр класса ModelRecipe
                 ModelRecipe modelRecipe = new ModelRecipe();
                 //Выводим на консоль название категорий
-                ViewCategory.PrintingСategories();
+                ViewCategory.PrintingСategories(unitOfWork.contextEntity.CategorySheet);
                 //Добавляем индекс категории
-                modelRecipe.idCategoty = CategoryController.CheckingCategoryIndex();
+                modelRecipe.IdСategory = CategoryController.CheckingCategoryIndex(unitOfWork);
                 //Добавляем имя рецепту
-                modelRecipe.nameRecept = ReceptController.AddName();
+                modelRecipe.NameRecept = ReceptController.AddName();
                 Console.WriteLine("\n\tВыбирте номер ингридиентa из списка:\n");
-                //Механизм вывода списка ингридиентов на консоль
-                ViewIngridient.PrintIngridient();
+                //Механизм вывода списка ингредиентов на консоль
+                ViewIngridient.PrintIngridient(unitOfWork.contextEntity.IngredientSheet);
                 //Выделяем динамическую память под объект
-                modelRecipe.idIngredient = new List<int>();
+                modelRecipe.IdIngredient = new List<int>();
                 //Добавляем в лист с индексами указанных ингредиентов. Дубликаты не допускаются
-                modelRecipe.idIngredient.AddRange(IngredientController.FormationListIndices().Distinct().ToArray());
+                modelRecipe.IdIngredient.AddRange(IngredientController.FormationListIndices(unitOfWork.contextEntity.IngredientSheet).Distinct().ToArray());
                 //Добавляем описание рецепта
-                modelRecipe.recipeDescription = ReceptController.AddDescription();
+                modelRecipe.RecipeDescription = ReceptController.AddDescription();
                 //Выделяем динамическую память
-                modelRecipe.recipeSteps = new List<string>();
+                modelRecipe.RecipeSteps = new List<string>();
                 //Добавляем в рецепт шаги приготовления рецепта. Повторение шагов не допускается
-                modelRecipe.recipeSteps.AddRange(ReceptController.AddRecipeSteps(modelRecipe.recipeSteps).Distinct().ToArray());
+                modelRecipe.RecipeSteps.AddRange(ReceptController.AddRecipeSteps(modelRecipe.RecipeSteps).Distinct().ToArray());
+                //Добавляем id-к
+                modelRecipe.Id = ReceptController.AddId(unitOfWork.contextEntity.RecipeSheet);
                 //Добавляем новый рецепт в переменную
                 listModelRecipes.Add(modelRecipe);
                 Console.WriteLine("\n\tДля введения следующего рецепта нажмите - 'Enter'" +
                                     "\n\tДля выхода в главное меню 'e'\n");
-                keypress = Console.ReadKey();
-            } while (keypress.KeyChar != 'e');
+                keyPress = Console.ReadKey();
+                } while (keyPress.KeyChar != 'e');
             return listModelRecipes;
         }
     }
-
+}

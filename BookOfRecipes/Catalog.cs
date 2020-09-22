@@ -2,43 +2,41 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Runtime.Serialization;
-using System.Reflection;
-using BookOfRecipes;
 
-static class Catalog
+
+namespace BookOfRecipes
+{
+    class Catalog
     {
         //Метод выполняющий навигацию по каталогу
-        public static void ShowCatalog()
+        public static void ShowCatalog(UnitOfWork unitOfWork)
         {
-            ConsoleKeyInfo keypress;
+            ConsoleKeyInfo keyPress;
             do
             {
                 //Выводим список названий категорий
-                ViewCategory.PrintingСategories();
+                ViewCategory.PrintingСategories(unitOfWork.contextEntity.CategorySheet);
                 //Выполняем проверку корректности введенного индекса
-                int result = CategoryController.CheckingCategoryIndex();
+                int result = CategoryController.CheckingCategoryIndex(unitOfWork);
                 //Проверка корректности  введенного индекса категории
                 if (result != 0)
                 {
-                    Console.WriteLine(string.Format("\n\tВыбрана категория: {0}\n", SaveList.categorySheet[result - 1].nameCategory));
+                    Console.WriteLine(string.Format("\n\tВыбрана категория: {0}\n", unitOfWork.contextEntity.CategorySheet[result - 1].NameCategory));
                     //Выводим имена рецептов
-                    if (ViewRecipe.PrintRecipesByСategory(result) != 0)
+                    if (ViewRecipe.PrintRecipesByСategory(result, unitOfWork.contextEntity.RecipeSheet) != 0)
                     {
                         //Объявляем переменную для сохранения индексов отфильтрованных рецептов, согласно выбранной категории
                         List<int> selectIndex = new List<int>();
                         //Заносим индексы рецептов согласно выбранной категории
-                        for (int i = 0; i < SaveList.recipeSheet.Count; i++)
+                        for (int i = 0; i < unitOfWork.contextEntity.RecipeSheet.Count; i++)
                         {
-                            if (SaveList.recipeSheet[i].idCategoty == result)
+                            if (unitOfWork.contextEntity.RecipeSheet[i].IdСategory == result)
                             {
                                 selectIndex.Add(i + 1);
                             }
                         }
                         //Просматриваем детали рецепта
-                        ViewRecipe.PrintRecipeDetails(selectIndex);
+                        ViewRecipe.PrintRecipeDetails(selectIndex, unitOfWork.contextEntity.RecipeSheet, unitOfWork.contextEntity.IngredientSheet);
                     }
                 }
                 else
@@ -49,9 +47,8 @@ static class Catalog
                 Console.WriteLine();
                 Console.WriteLine("\n\tДля дальнейшего просмотра каталога рецептов нажмите - 'Enter'" +
                                   "\n\tДля выхода в главное меню - 'e'\n");
-                keypress = Console.ReadKey();
-            } while (keypress.KeyChar != 'e');
-            //Navigation.ProvidingOptions();
+                keyPress = Console.ReadKey();
+            } while (keyPress.KeyChar != 'e');
         }
     }
-
+}
