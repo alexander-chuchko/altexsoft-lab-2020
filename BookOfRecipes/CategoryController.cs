@@ -8,7 +8,7 @@ namespace BookOfRecipes
     class CategoryController
     {
         //Метод для добавления списка категорий
-        public static List<ModelCategory> CreateCategories()
+        public List<ModelCategory> CreateCategories()
         {
             string[] listСategories = { "блюда из лаваша", "мясные блюда", "фруктово-ягодные блюда", "творожные блюда", "овощные блюда" };
             List<ModelCategory> categories = new List<ModelCategory>(listСategories.Length);
@@ -19,12 +19,12 @@ namespace BookOfRecipes
             return categories;
         }
         //Метод для добавления категории
-        public static ModelCategory CreateCategory(List<ModelCategory> modelCategories)
+        public ModelCategory CreateCategory(List<ModelCategory> modelCategories)
         {
             ModelCategory modelCategory = null;
             Console.WriteLine("\n\tВведите название категории:\n");
             string input = Console.ReadLine();
-            if(!modelCategories.Exists(x=>x.NameCategory==input&&string.IsNullOrEmpty(input)))
+            if (!modelCategories.Exists(x => x.NameCategory == input && string.IsNullOrEmpty(input)))
             {
                 modelCategory = new ModelCategory() { NameCategory = input, Id = modelCategories.Count };
             }
@@ -32,7 +32,7 @@ namespace BookOfRecipes
         }
 
         //Метод получения выбранного индекса каталога пользователем
-        public static int CheckingCategoryIndex(UnitOfWork unitOfWork)
+        public int CheckingCategoryIndex(UnitOfWork unitOfWork)
         {
             Console.WriteLine("\n\tВыбирите номер категории");
             for (int i = 0; i < unitOfWork.contextEntity.CategorySheet.Count; i++)

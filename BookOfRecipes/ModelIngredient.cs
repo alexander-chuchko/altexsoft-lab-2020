@@ -6,7 +6,7 @@ using System.Linq;
 namespace BookOfRecipes
 {
     [Serializable]
-    class ModelIngredient: EntityBase
+    class ModelIngredient : EntityBase
     {
         public string NameIngredient { get; set; }
     }

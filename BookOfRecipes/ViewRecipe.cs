@@ -7,7 +7,7 @@ namespace BookOfRecipes
 {
     class ViewRecipe
     {
-        public static int PrintRecipesByСategory(int categoryNumber, List<ModelRecipe> modelRecipes)
+        public int PrintRecipesByСategory(int categoryNumber, List<ModelRecipe> modelRecipes)
         {
             int counter = 0;
             Console.WriteLine("\n\tВыводим имена рецептов согласно указанной категории:\n");
@@ -23,7 +23,7 @@ namespace BookOfRecipes
             Console.WriteLine("\n\tВ данном списке {0} рецептов.\n", counter);
             return counter;
         }
-        public static void PrintRecipeDetails(List<int> idRecipes, List<ModelRecipe> modelRecipes, List<ModelIngredient> modelIngredients)
+        public void PrintRecipeDetails(List<int> idRecipes, List<ModelRecipe> modelRecipes, List<ModelIngredient> modelIngredients)
         {
             if (modelRecipes.Count > 0)
             {
@@ -37,7 +37,7 @@ namespace BookOfRecipes
                     //Выводим список ингридиентов выбранного пользователем рецепта
                     foreach (int i in modelRecipes[result - 1].IdIngredient)
                     {
-                        Console.WriteLine("\t\t" + string.Join(" ", modelIngredients[i-1].NameIngredient));
+                        Console.WriteLine("\t\t" + string.Join(" ", modelIngredients[i - 1].NameIngredient));
                     }
                 }
                 else

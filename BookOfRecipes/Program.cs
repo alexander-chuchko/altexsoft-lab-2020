@@ -13,8 +13,10 @@ namespace BookOfRecipes
         {
             ContextEntity contextEntity = new ContextEntity();
             UnitOfWork unitOfWork = new UnitOfWork(contextEntity);
-            CatalogFiles.HandlingFile(unitOfWork);
-            Navigation.ProvidingOptions(unitOfWork);
+            CatalogFiles catalogFiles = new CatalogFiles();
+            catalogFiles.HandlingFile(unitOfWork);
+            Navigation navigation = new Navigation();
+            navigation.ProvidingOptions(unitOfWork);
 
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);

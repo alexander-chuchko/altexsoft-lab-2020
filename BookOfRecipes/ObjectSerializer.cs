@@ -10,14 +10,9 @@ namespace BookOfRecipes
 {
     class ObjectSerializer<T>
     {
-        //Метод выполняющий сериализацию объектов в json файл
         public void SerializingFile(List<T> informationFile, string path)
         {
-            DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(List<T>));
-            using (FileStream fs = new FileStream(path, FileMode.Create))
-            {
-                dataContractSerializer.WriteObject(fs, informationFile);
-            }
+            File.WriteAllText(path, JsonConvert.SerializeObject(informationFile, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }));
         }
     }
 }

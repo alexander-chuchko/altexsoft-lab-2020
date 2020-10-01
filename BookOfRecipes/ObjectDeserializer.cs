@@ -13,12 +13,8 @@ namespace BookOfRecipes
         //Метод выполняющий десериализацию файлов
         public List<T> DeserializingFile(string path)
         {
-            DataContractSerializer dataContractSerialize = new DataContractSerializer(typeof(List<T>));
             List<T> informationFile = new List<T>();
-            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-            {
-                informationFile = (List<T>)dataContractSerialize.ReadObject(fs);
-            }
+            informationFile = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
             return informationFile;
         }
     }

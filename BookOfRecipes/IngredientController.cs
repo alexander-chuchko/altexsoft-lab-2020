@@ -9,7 +9,7 @@ namespace BookOfRecipes
     class IngredientController
     {
         //Метод для добавления захардкоженных ингридиентов 
-        public static List<ModelIngredient> CreateIngredients()
+        public List<ModelIngredient> CreateIngredients()
         {
             string[] listIngredients = { "айва", "сахар","вода","лимона","молоко","сметана","яйцо","сливочное масло","ванильный сахар","соль","муки",
                                     "сухих дрожжи","малины","уксус яблочный","соевый соус","перец красный молотый","перец черный молотый",
@@ -26,7 +26,7 @@ namespace BookOfRecipes
         //Метод для формирования ингредиента
         public static ModelIngredient CreateIngredient(List<ModelIngredient> modelIngredients)
         {
-            ModelIngredient modelIngredient=null;
+            ModelIngredient modelIngredient = null;
             string userMessage = "Введите имя ингредиента: ";
             Console.WriteLine("\n\t{0}:", userMessage);
             string newIngredient = Console.ReadLine();

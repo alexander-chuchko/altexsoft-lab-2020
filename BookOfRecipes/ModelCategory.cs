@@ -6,7 +6,7 @@ using System.Linq;
 namespace BookOfRecipes
 {
     [Serializable]
-    class ModelCategory: EntityBase
+    class ModelCategory : EntityBase
     {
         public string NameCategory { get; set; }
     }

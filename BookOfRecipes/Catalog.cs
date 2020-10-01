@@ -8,22 +8,31 @@ namespace BookOfRecipes
 {
     class Catalog
     {
+        public ViewCategory viewCategory;
+        public ViewRecipe viewRecipe;
+
+        public Catalog(ViewCategory viewCategory, ViewRecipe viewRecipe)
+        {
+            this.viewCategory = viewCategory;
+            this.viewRecipe = viewRecipe;
+        }
         //Метод выполняющий навигацию по каталогу
-        public static void ShowCatalog(UnitOfWork unitOfWork)
+        public void ShowCatalog(UnitOfWork unitOfWork)
         {
             ConsoleKeyInfo keyPress;
             do
             {
                 //Выводим список названий категорий
-                ViewCategory.PrintingСategories(unitOfWork.contextEntity.CategorySheet);
+                viewCategory.PrintingСategories(unitOfWork.contextEntity.CategorySheet);
                 //Выполняем проверку корректности введенного индекса
-                int result = CategoryController.CheckingCategoryIndex(unitOfWork);
+                CategoryController categoryController = new CategoryController();
+                int result = categoryController.CheckingCategoryIndex(unitOfWork);
                 //Проверка корректности  введенного индекса категории
                 if (result != 0)
                 {
                     Console.WriteLine(string.Format("\n\tВыбрана категория: {0}\n", unitOfWork.contextEntity.CategorySheet[result - 1].NameCategory));
                     //Выводим имена рецептов
-                    if (ViewRecipe.PrintRecipesByСategory(result, unitOfWork.contextEntity.RecipeSheet) != 0)
+                    if (viewRecipe.PrintRecipesByСategory(result, unitOfWork.contextEntity.RecipeSheet) != 0)
                     {
                         //Объявляем переменную для сохранения индексов отфильтрованных рецептов, согласно выбранной категории
                         List<int> selectIndex = new List<int>();
@@ -36,7 +45,7 @@ namespace BookOfRecipes
                             }
                         }
                         //Просматриваем детали рецепта
-                        ViewRecipe.PrintRecipeDetails(selectIndex, unitOfWork.contextEntity.RecipeSheet, unitOfWork.contextEntity.IngredientSheet);
+                        viewRecipe.PrintRecipeDetails(selectIndex, unitOfWork.contextEntity.RecipeSheet, unitOfWork.contextEntity.IngredientSheet);
                     }
                 }
                 else

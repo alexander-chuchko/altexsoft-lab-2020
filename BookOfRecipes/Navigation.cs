@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-
 namespace BookOfRecipes
 {
     class Navigation
     {
-        public static int CheckValue(string value)
+        public int CheckValue(string value)
         {
             int numberOptions = 2;
-            if(int.TryParse(value, out int result) && result > 0 && result <= numberOptions)
+            if (int.TryParse(value, out int result) && result > 0 && result <= numberOptions)
             {
                 return result;
             }
@@ -19,9 +18,14 @@ namespace BookOfRecipes
             return 0;
         }
 
-        public static void ProvidingOptions(UnitOfWork unitOfWork)
+        public void ProvidingOptions(UnitOfWork unitOfWork)
         {
             int numberOfMethods = 6;
+            ViewCategory viewCategory = new ViewCategory();
+            ViewRecipe viewRecipe = new ViewRecipe();
+            ViewIngridient viewIngridient = new ViewIngridient();
+            Catalog catalog = new Catalog(viewCategory,viewRecipe);
+            ReceptController receptController = new ReceptController(viewIngridient, viewCategory);
             Console.WriteLine("\n\tВ книге есть рецепты. Выберите необходимую опцию\n");
             Console.WriteLine("\n\t1 - Просмотр каталога\n\t2 - Создание рецепта\n\t3 - Просмотр и создание категорий\n\t4 - Просмотр и создание ингредиентов\n\t5 - Сохранить данные\n\t6 - Выход из приложения\n");
             Console.WriteLine("\n\tВведите необходимый индекс:");
@@ -33,18 +37,19 @@ namespace BookOfRecipes
                 {
                     switch (number)
                     {
-                        
+
                         case 1:
                             Console.WriteLine("\n\tРаботает метод ShowCatalog\n");
-                            Catalog.ShowCatalog(unitOfWork);
+                            catalog.ShowCatalog(unitOfWork);
                             Console.Clear();
-                            Navigation.ProvidingOptions(unitOfWork);
+                            ProvidingOptions(unitOfWork);
                             break;
                         case 2:
                             Console.WriteLine("\n\tРаботает метод CreateRecipe\n");
-                            unitOfWork.repositoryReciipe.AddRange(ReceptController.CreateRecipe(unitOfWork));
+                           
+                            unitOfWork.repositoryRecipe.AddRange(receptController.CreateRecipe(unitOfWork));
                             Console.Clear();
-                            Navigation.ProvidingOptions(unitOfWork);
+                            ProvidingOptions(unitOfWork);
                             break;
                         case 3:
                             do
@@ -58,11 +63,12 @@ namespace BookOfRecipes
                                     {
                                         case 1:
                                             //Выполняем просмотр перечня существующих категорий
-                                            ViewCategory.PrintingСategories((List<ModelCategory>)unitOfWork.repositoryCategory.GetAll());
+                                            viewCategory.PrintingСategories((List<ModelCategory>)unitOfWork.repositoryCategory.GetAll());
                                             break;
                                         case 2:
                                             //Создаем и добавляем новую категорию
-                                            unitOfWork.repositoryCategory.Add(CategoryController.CreateCategory(unitOfWork.contextEntity.CategorySheet));
+                                            CategoryController categoryController = new CategoryController();
+                                            unitOfWork.repositoryCategory.Add(categoryController.CreateCategory(unitOfWork.contextEntity.CategorySheet));
                                             break;
                                     }
                                 }
@@ -71,7 +77,7 @@ namespace BookOfRecipes
                                 keyPress = Console.ReadKey();
                             } while (keyPress.KeyChar != 'e');
                             Console.Clear();
-                            Navigation.ProvidingOptions(unitOfWork);
+                            ProvidingOptions(unitOfWork);
                             break;
                         case 4:
                             do
@@ -85,7 +91,7 @@ namespace BookOfRecipes
                                     {
                                         case 1:
                                             //Выполняем просмотр перечня существующих категорий
-                                            ViewIngridient.PrintIngridient((List<ModelIngredient>)unitOfWork.repositoryIngredient.GetAll());
+                                            viewIngridient.PrintIngridient((List<ModelIngredient>)unitOfWork.repositoryIngredient.GetAll());
                                             break;
                                         case 2:
                                             //Создаем и добавляем новую категорию
@@ -98,13 +104,13 @@ namespace BookOfRecipes
                                 keyPress = Console.ReadKey();
                             } while (keyPress.KeyChar != 'e');
                             Console.Clear();
-                            Navigation.ProvidingOptions(unitOfWork);
+                            ProvidingOptions(unitOfWork);
                             break;
                         case 5:
                             Console.WriteLine("\n\tВыполняется сохранение данных\n");
                             unitOfWork.Commit();
                             Console.Clear();
-                            Navigation.ProvidingOptions(unitOfWork);
+                            ProvidingOptions(unitOfWork);
                             break;
                         case 6:
                             Console.WriteLine("\n\tОсуществляется выход из программы!\n");

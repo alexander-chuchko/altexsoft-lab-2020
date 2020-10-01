@@ -9,7 +9,7 @@ namespace BookOfRecipes
     class ViewIngridient
     {
         //Метод выводит список ингредиентов на консоль
-        public static void PrintIngridient(List<ModelIngredient> modelIngredients)
+        public void PrintIngridient(List<ModelIngredient> modelIngredients)
         {
             if (modelIngredients.Count > 0)
             {
@@ -24,5 +24,5 @@ namespace BookOfRecipes
             }
         }
     }
-    
+
 }
