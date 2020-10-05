@@ -1,13 +1,19 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace BookOfRecipes
 {
-    class ViewRecipe
+    class RecipeViewer: IRecipeViewer
     {
-        public int PrintRecipesByСategory(int categoryNumber, List<ModelRecipe> modelRecipes)
+        RecipeViewer IRecipeViewer.GetLink()
+        {
+            RecipeViewer recipeViewer = new RecipeViewer();
+            return recipeViewer;
+        }
+        public int PrintRecipesByСategory(int categoryNumber, List<Recipe> modelRecipes)
         {
             int counter = 0;
             Console.WriteLine("\n\tВыводим имена рецептов согласно указанной категории:\n");
@@ -23,7 +29,7 @@ namespace BookOfRecipes
             Console.WriteLine("\n\tВ данном списке {0} рецептов.\n", counter);
             return counter;
         }
-        public void PrintRecipeDetails(List<int> idRecipes, List<ModelRecipe> modelRecipes, List<ModelIngredient> modelIngredients)
+        public void PrintRecipeDetails(List<int> idRecipes, List<Recipe> modelRecipes, List<Ingredient> modelIngredients)
         {
             if (modelRecipes.Count > 0)
             {

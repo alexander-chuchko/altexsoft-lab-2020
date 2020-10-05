@@ -13,11 +13,14 @@ namespace BookOfRecipes
         {
             ContextEntity contextEntity = new ContextEntity();
             UnitOfWork unitOfWork = new UnitOfWork(contextEntity);
-            CatalogFiles catalogFiles = new CatalogFiles();
-            catalogFiles.HandlingFile(unitOfWork);
-            Navigation navigation = new Navigation();
-            navigation.ProvidingOptions(unitOfWork);
-
+            CategoryViewer categoryViewer = new CategoryViewer();
+            IngridientViewer ingridientViewer = new IngridientViewer();
+            RecipeViewer recipeViewer = new RecipeViewer();
+            CatalogFiles catalogFiles = new CatalogFiles(unitOfWork, categoryViewer, ingridientViewer);
+            catalogFiles.HandlingFile();
+            Navigation navigation = new Navigation(unitOfWork, categoryViewer, ingridientViewer, recipeViewer);
+            navigation.ProvidingOptions();
+            
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
         }

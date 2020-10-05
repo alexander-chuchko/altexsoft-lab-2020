@@ -7,38 +7,44 @@ namespace BookOfRecipes
 {
     class CategoryController
     {
+        private readonly IUnitOfWork unitOfWork;
+
+        public CategoryController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
         //Метод для добавления списка категорий
-        public List<ModelCategory> CreateCategories()
+        public List<Category> CreateCategories()
         {
             string[] listСategories = { "блюда из лаваша", "мясные блюда", "фруктово-ягодные блюда", "творожные блюда", "овощные блюда" };
-            List<ModelCategory> categories = new List<ModelCategory>(listСategories.Length);
+            List<Category> categories = new List<Category>(listСategories.Length);
             for (int i = 0; i < listСategories.Length; i++)
             {
-                categories.Add(new ModelCategory { Id = i + 1, NameCategory = listСategories[i] });
+                categories.Add(new Category { Id = i + 1, NameCategory = listСategories[i] });
             }
             return categories;
         }
         //Метод для добавления категории
-        public ModelCategory CreateCategory(List<ModelCategory> modelCategories)
+        public Category CreateCategory(List<Category> modelCategories)
         {
-            ModelCategory modelCategory = null;
+            Category modelCategory = null;
             Console.WriteLine("\n\tВведите название категории:\n");
             string input = Console.ReadLine();
             if (!modelCategories.Exists(x => x.NameCategory == input && string.IsNullOrEmpty(input)))
             {
-                modelCategory = new ModelCategory() { NameCategory = input, Id = modelCategories.Count };
+                modelCategory = new Category() { NameCategory = input, Id = modelCategories.Count };
             }
             return modelCategory;
         }
 
         //Метод получения выбранного индекса каталога пользователем
-        public int CheckingCategoryIndex(UnitOfWork unitOfWork)
+        public int CheckingCategoryIndex()
         {
             Console.WriteLine("\n\tВыбирите номер категории");
-            for (int i = 0; i < unitOfWork.contextEntity.CategorySheet.Count; i++)
+            for (int i = 0; i < unitOfWork.GetLink().GetCategory.GetAll().ToList().Count; i++)
             {
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out int result) && unitOfWork.contextEntity.CategorySheet.Count >= result && unitOfWork.contextEntity.CategorySheet.Count > 0)
+                if (int.TryParse(input, out int result) && unitOfWork.GetLink().GetCategory.GetAll().ToList().Count >= result && unitOfWork.GetLink().GetCategory.GetAll().ToList().Count > 0)
                 {
                     return result;
                 }

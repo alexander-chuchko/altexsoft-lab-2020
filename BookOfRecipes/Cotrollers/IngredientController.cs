@@ -9,30 +9,30 @@ namespace BookOfRecipes
     class IngredientController
     {
         //Метод для добавления захардкоженных ингридиентов 
-        public List<ModelIngredient> CreateIngredients()
+        public List<Ingredient> CreateIngredients()
         {
             string[] listIngredients = { "айва", "сахар","вода","лимона","молоко","сметана","яйцо","сливочное масло","ванильный сахар","соль","муки",
                                     "сухих дрожжи","малины","уксус яблочный","соевый соус","перец красный молотый","перец черный молотый",
                                     "жидкий мед","коричневый сахар","миндальных хлопьев","овсяных хлопьев","хурма","розмарин","орехи грецкие",
                                     "изюм","рис отварной","лаваш", "филе куринное","колбаса","перец болгарский сладкий","лук репчатый","помидор свежий",
                                     "чеснок","масло растительно","майонез","сосиски","плавленый сыр","горчица","кетчуп"};
-            List<ModelIngredient> ingridient = new List<ModelIngredient>(listIngredients.Length);
+            List<Ingredient> ingridient = new List<Ingredient>(listIngredients.Length);
             for (int i = 0; i < listIngredients.Length; i++)
             {
-                ingridient.Add(new ModelIngredient { Id = i + 1, NameIngredient = listIngredients[i] });
+                ingridient.Add(new Ingredient { Id = i + 1, NameIngredient = listIngredients[i] });
             }
             return ingridient;
         }
         //Метод для формирования ингредиента
-        public static ModelIngredient CreateIngredient(List<ModelIngredient> modelIngredients)
+        public Ingredient CreateIngredient(List<Ingredient> modelIngredients)
         {
-            ModelIngredient modelIngredient = null;
+            Ingredient modelIngredient = null;
             string userMessage = "Введите имя ингредиента: ";
             Console.WriteLine("\n\t{0}:", userMessage);
             string newIngredient = Console.ReadLine();
             if (!string.IsNullOrEmpty(newIngredient) && !modelIngredients.Exists(x => x.NameIngredient == newIngredient))
             {
-                modelIngredient = new ModelIngredient() { Id = modelIngredients.Count + 1, NameIngredient = newIngredient };
+                modelIngredient = new Ingredient() { Id = modelIngredients.Count + 1, NameIngredient = newIngredient };
                 return modelIngredient;
             }
             else
@@ -42,7 +42,7 @@ namespace BookOfRecipes
             }
         }
         //Метод для формирования списка выбранных индексов ингридиентов пользователем
-        public static List<int> FormationListIndices(List<ModelIngredient> modelIngredients)
+        public List<int> FormationListIndices(List<Ingredient> modelIngredients)
         {
             Console.WriteLine("\n\tНеобходимо указать номер ингридиента. По окончанию формирования списка введите - 'e'" +
                    "\n\tВведите номер:\n");

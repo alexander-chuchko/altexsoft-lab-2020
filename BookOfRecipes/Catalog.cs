@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,44 +9,47 @@ namespace BookOfRecipes
 {
     class Catalog
     {
-        public ViewCategory viewCategory;
-        public ViewRecipe viewRecipe;
-
-        public Catalog(ViewCategory viewCategory, ViewRecipe viewRecipe)
+        private readonly ICategoryViewer categoryViewer;
+        private readonly IRecipeViewer recipeViewer;
+        private readonly IUnitOfWork unitOfWork;
+        public Catalog(ICategoryViewer categoryViewer, IRecipeViewer recipeViewer, IUnitOfWork unitOfWork)
         {
-            this.viewCategory = viewCategory;
-            this.viewRecipe = viewRecipe;
+            this.categoryViewer = categoryViewer;
+            this.recipeViewer = recipeViewer;
+            this.unitOfWork = unitOfWork;
         }
+
         //Метод выполняющий навигацию по каталогу
-        public void ShowCatalog(UnitOfWork unitOfWork)
+        public void ShowCatalog()
         {
             ConsoleKeyInfo keyPress;
             do
             {
                 //Выводим список названий категорий
-                viewCategory.PrintingСategories(unitOfWork.contextEntity.CategorySheet);
+                categoryViewer.GetLink().PrintingСategories(unitOfWork.GetLink().GetCategory.GetAll().ToList());
                 //Выполняем проверку корректности введенного индекса
-                CategoryController categoryController = new CategoryController();
-                int result = categoryController.CheckingCategoryIndex(unitOfWork);
+                CategoryController categoryController = new CategoryController(unitOfWork.GetLink());
+                int result = categoryController.CheckingCategoryIndex();
                 //Проверка корректности  введенного индекса категории
                 if (result != 0)
                 {
-                    Console.WriteLine(string.Format("\n\tВыбрана категория: {0}\n", unitOfWork.contextEntity.CategorySheet[result - 1].NameCategory));
+                    Console.WriteLine(string.Format("\n\tВыбрана категория: {0}\n", unitOfWork.GetLink().GetCategory.GetAll().ToList()[result - 1].NameCategory));
                     //Выводим имена рецептов
-                    if (viewRecipe.PrintRecipesByСategory(result, unitOfWork.contextEntity.RecipeSheet) != 0)
+                    if (recipeViewer.GetLink().PrintRecipesByСategory(result, unitOfWork.GetLink().GetRecipe.GetAll().ToList()) != 0)
                     {
                         //Объявляем переменную для сохранения индексов отфильтрованных рецептов, согласно выбранной категории
                         List<int> selectIndex = new List<int>();
                         //Заносим индексы рецептов согласно выбранной категории
-                        for (int i = 0; i < unitOfWork.contextEntity.RecipeSheet.Count; i++)
+                        for (int i = 0; i < unitOfWork.GetLink().GetRecipe.GetAll().ToList().Count; i++)
                         {
-                            if (unitOfWork.contextEntity.RecipeSheet[i].IdСategory == result)
+                            if (unitOfWork.GetLink().GetRecipe.GetAll().ToList()[i].IdСategory == result)
                             {
                                 selectIndex.Add(i + 1);
                             }
                         }
-                        //Просматриваем детали рецепта
-                        viewRecipe.PrintRecipeDetails(selectIndex, unitOfWork.contextEntity.RecipeSheet, unitOfWork.contextEntity.IngredientSheet);
+                        //Просматриваем детали рецепт
+                        recipeViewer.GetLink().PrintRecipeDetails(selectIndex, unitOfWork.GetLink().GetRecipe.GetAll().ToList(), unitOfWork.GetLink().GetIngredient.GetAll().ToList());
+
                     }
                 }
                 else

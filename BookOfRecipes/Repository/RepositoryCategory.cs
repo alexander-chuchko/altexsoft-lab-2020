@@ -5,35 +5,35 @@ using System.Text;
 
 namespace BookOfRecipes
 {
-    class RepositoryCategory : IRepository<ModelCategory>
+    class RepositoryCategory : IRepository<Category>
     {
         //Объявляем ссылку типа ContextEntity
-        public ContextEntity contextEntity;
+        ContextEntity contextEntity;
         public RepositoryCategory(ContextEntity contextEntity)
         {
             this.contextEntity = contextEntity;
         }
-        public void Add(ModelCategory entity)
+        public void Add(Category entity)
         {
             if (entity != null)
                 contextEntity.CategorySheet.Add(entity);
         }
-        public void AddRange(IEnumerable<ModelCategory> entities)
+        public void AddRange(IEnumerable<Category> entities)
         {
             contextEntity.CategorySheet.AddRange(entities);
         }
-        public void Delete(ModelCategory entity)
+        public void Delete(Category entity)
         {
             if (entity != null)
                 contextEntity.CategorySheet.Remove(entity);
         }
 
-        public IEnumerable<ModelCategory> GetAll()
+        public IEnumerable<Category> GetAll()
         {
             return contextEntity.CategorySheet.OrderBy(x => x.Id).ToList();
         }
 
-        public ModelCategory GetById(int id)
+        public Category GetById(int id)
         {
             return contextEntity.CategorySheet.Find(x => x.Id == id);
         }

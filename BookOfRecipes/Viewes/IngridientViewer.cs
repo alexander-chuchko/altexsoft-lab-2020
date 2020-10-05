@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,10 +7,15 @@ using System.Linq;
 
 namespace BookOfRecipes
 {
-    class ViewIngridient
+    class IngridientViewer: IIngridientViewer
     {
+        IngridientViewer IIngridientViewer.GetLink()
+        {
+            IngridientViewer ingridientViewer = new IngridientViewer();
+            return ingridientViewer;
+        }
         //Метод выводит список ингредиентов на консоль
-        public void PrintIngridient(List<ModelIngredient> modelIngredients)
+        public void PrintIngridient(List<Ingredient> modelIngredients)
         {
             if (modelIngredients.Count > 0)
             {
@@ -24,5 +30,4 @@ namespace BookOfRecipes
             }
         }
     }
-
 }

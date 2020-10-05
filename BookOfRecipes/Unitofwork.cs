@@ -1,30 +1,59 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 
 namespace BookOfRecipes
 {
-    class UnitOfWork : IDisposable
+    class UnitOfWork : IDisposable, IUnitOfWork
     {
-        public ContextEntity contextEntity { get; set; }
-        public RepositoryCategory repositoryCategory { get; set; }
-        public RepositoryIngredient repositoryIngredient { get; set; }
-        public RepositoryRecipe repositoryRecipe { get; set; }
+        ContextEntity contextEntity; 
+        RepositoryCategory repositoryCategory;
+        RepositoryIngredient repositoryIngredient; 
+        RepositoryRecipe repositoryRecipe; 
 
         public UnitOfWork(ContextEntity contextEntity)
         {
             this.contextEntity = contextEntity;
-            repositoryRecipe = new RepositoryRecipe(contextEntity);
-            repositoryIngredient = new RepositoryIngredient(contextEntity);
-            repositoryCategory = new RepositoryCategory(contextEntity);
         }
-
+        public RepositoryCategory GetCategory
+        {
+            get
+            {
+                if (repositoryCategory == null)
+                    repositoryCategory = new RepositoryCategory(contextEntity);
+                return repositoryCategory;
+            }
+        }
+        public RepositoryIngredient GetIngredient
+        {
+            get
+            {
+                if (repositoryIngredient == null)
+                    repositoryIngredient = new RepositoryIngredient(contextEntity);
+                return repositoryIngredient;
+            }
+        }
+        public RepositoryRecipe GetRecipe
+        {
+            get
+            {
+                if (repositoryRecipe == null)
+                    repositoryRecipe = new RepositoryRecipe(contextEntity);
+                return repositoryRecipe;
+            }
+        }
         public void Commit()
         {
             contextEntity.SaveChanges();
         }
 
+        UnitOfWork IUnitOfWork.GetLink()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(contextEntity);
+            return unitOfWork;
+        }
         private bool disposed = false;
  
         public virtual void Dispose(bool disposing)
@@ -45,5 +74,5 @@ namespace BookOfRecipes
             GC.SuppressFinalize(this);
         }
     }
-    }
+}
 

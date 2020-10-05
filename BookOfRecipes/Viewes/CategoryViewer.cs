@@ -1,13 +1,14 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace BookOfRecipes
 {
-    class ViewCategory
+    class CategoryViewer: ICategoryViewer
     {
-        public void PrintingСategories(List<ModelCategory> modelCategories)
+        public void PrintingСategories(List<Category> modelCategories)
         {
             if (modelCategories.Count > 0)
             {
@@ -22,6 +23,11 @@ namespace BookOfRecipes
                 Console.WriteLine("В данном листе нет категорий");
             }
 
+        }
+        CategoryViewer ICategoryViewer.GetLink()
+        {
+            CategoryViewer categoryViewer=new CategoryViewer();
+            return categoryViewer;
         }
     }
 
