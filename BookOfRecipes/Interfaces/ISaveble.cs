@@ -4,8 +4,7 @@ using System.Text;
 
 namespace BookOfRecipes.Interfaces
 {
-    interface IRecipeViewer
+    interface ISaveble
     {
-        RecipeViewer GetLink();
     }
 }

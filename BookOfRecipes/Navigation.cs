@@ -1,4 +1,5 @@
 ﻿using BookOfRecipes.Interfaces;
+using BookOfRecipes.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,14 +12,23 @@ namespace BookOfRecipes
         private readonly IUnitOfWork unitOfWork;
         private readonly ICategoryViewer categoryViewer;
         private readonly IIngridientViewer ingridientViewer;
-        private readonly IRecipeViewer recipeViewer;
-
-        public Navigation(IUnitOfWork unitOfWork, ICategoryViewer categoryViewer, IIngridientViewer ingridientViewer, IRecipeViewer recipeViewer)
+        private readonly ICategoryController categoryController;
+        private readonly IIngredientController ingredientController;
+        private readonly IDirectoryViewer directoryViewer;
+        private readonly IReceptController receptController;
+        private readonly ISubcategoryController subcategoryController;
+        private readonly ISubcategoryViewer subcategoryViewer;
+        public Navigation(IUnitOfWork unitOfWork, ICategoryViewer categoryViewer, IIngridientViewer ingridientViewer, ICategoryController categoryController, IIngredientController ingredientController, IDirectoryViewer directoryViewer, IReceptController receptController, ISubcategoryViewer subcategoryViewer, ISubcategoryController subcategoryController)
         {
             this.unitOfWork = unitOfWork;
             this.categoryViewer = categoryViewer;
             this.ingridientViewer = ingridientViewer;
-            this.recipeViewer = recipeViewer;
+            this.categoryController = categoryController;
+            this.ingredientController = ingredientController;
+            this.directoryViewer = directoryViewer;
+            this.receptController = receptController;
+            this.subcategoryViewer = subcategoryViewer;
+            this.subcategoryController = subcategoryController;
         }
         public int CheckValue(string value)
         {
@@ -33,30 +43,42 @@ namespace BookOfRecipes
 
         public void ProvidingOptions()
         {
-            int numberOfMethods = 6;
-            Catalog catalog = new Catalog(categoryViewer, recipeViewer, unitOfWork);
-            ReceptController receptController = new ReceptController(ingridientViewer,categoryViewer, unitOfWork);
+            string[] bookInterface =
+                {
+                "Просмотр каталога",
+                "Создание рецепта",
+                "Просмотр и создание категорий",
+                "Просмотр и создание ингредиентов",
+                "Просмотр и создание подкатегорий",
+                "Сохранить данные",
+                "Выход из приложения"
+            };
+            //int numberOfMethods = 7;
             Console.WriteLine("\n\tВ книге есть рецепты. Выберите необходимую опцию\n");
-            Console.WriteLine("\n\t1 - Просмотр каталога\n\t2 - Создание рецепта\n\t3 - Просмотр и создание категорий\n\t4 - Просмотр и создание ингредиентов\n\t5 - Сохранить данные\n\t6 - Выход из приложения\n");
+            for (int i = 0; i < bookInterface.Length; i++)
+            {
+                Console.WriteLine(string.Format("\n\t{0} - {1}\n", i + 1, bookInterface[i]));
+            }
+            //Console.WriteLine("\n\t1 - Просмотр каталога\n\t2 - Создание рецепта\n\t3 - Просмотр и создание категорий\n\t4 - Просмотр и создание ингредиентов\n\t5 - Просмотр и создание подкатегорий\n\t6 - Сохранить данные\n\t7 - Выход из приложения\n");
             Console.WriteLine("\n\tВведите необходимый индекс:");
             //Объявляем переменную
             ConsoleKeyInfo keyPress;
             do
             {
-                if (int.TryParse(Console.ReadLine(), out int number) && number > 0 && number <= numberOfMethods)
+                if (int.TryParse(Console.ReadLine(), out int number) && number > 0 && number <= bookInterface.Length)
                 {
                     switch (number)
                     {
 
                         case 1:
                             Console.WriteLine("\n\tРаботает метод ShowCatalog\n");
-                            catalog.ShowCatalog();
+                            directoryViewer.ShowCatalog();
                             Console.Clear();
                             ProvidingOptions();
                             break;
                         case 2:
                             Console.WriteLine("\n\tРаботает метод CreateRecipe\n");
-                            unitOfWork.GetLink().GetRecipe.AddRange(receptController.CreateRecipe());
+                            unitOfWork.Recipes.AddRange(receptController.CreateRecipe());
                             Console.Clear();
                             ProvidingOptions();
                             break;
@@ -72,12 +94,11 @@ namespace BookOfRecipes
                                     {
                                         case 1:
                                             //Выполняем просмотр перечня существующих категорий
-                                            categoryViewer.GetLink().PrintingСategories((List<Category>)unitOfWork.GetLink().GetCategory.GetAll().ToList());
+                                            categoryViewer.PrintingСategories(unitOfWork.Categories.GetAll<Category>().ToList());
                                             break;
                                         case 2:
                                             //Создаем и добавляем новую категорию
-                                            CategoryController categoryController = new CategoryController(unitOfWork);
-                                            unitOfWork.GetLink().GetCategory.Add(categoryController.CreateCategory(unitOfWork.GetLink().GetCategory.GetAll().ToList()));
+                                            unitOfWork.Categories.Add(categoryController.CreateCategory(unitOfWork.Categories.GetAll<Category>().ToList()));
                                             break;
                                     }
                                 }
@@ -100,18 +121,15 @@ namespace BookOfRecipes
                                     {
                                         case 1:
                                             //Выполняем просмотр перечня существующих категорий
-                                            ingridientViewer.GetLink().PrintIngridient((List<Ingredient>)unitOfWork.GetLink().GetIngredient.GetAll());
-
+                                            ingridientViewer.PrintIngridient(unitOfWork.Ingredients.GetAll<Ingredient>().ToList());
                                             break;
                                         case 2:
-                                            //Создаем и добавляем новую категорию
-                                            IngredientController ingredientController = new IngredientController();
-                                            unitOfWork.GetLink().GetIngredient.Add(ingredientController.CreateIngredient(unitOfWork.GetLink().GetIngredient.GetAll().ToList()));
-
+                                            //Создаем и добавляем новый ингредиент
+                                            unitOfWork.Ingredients.Add(ingredientController.CreateIngredient(unitOfWork.Ingredients.GetAll<Ingredient>().ToList()));
                                             break;
                                     }
                                 }
-                                Console.WriteLine("\n\tДля дальнейшего просмотра и содания категорий нажмите - 'Enter'" +
+                                Console.WriteLine("\n\tДля дальнейшего просмотра и содания ингредиентов нажмите - 'Enter'" +
                                 "\n\tДля выхода в главное меню - 'e'\n");
                                 keyPress = Console.ReadKey();
                             } while (keyPress.KeyChar != 'e');
@@ -119,12 +137,41 @@ namespace BookOfRecipes
                             ProvidingOptions();
                             break;
                         case 5:
+                            do
+                            {
+                                Console.WriteLine("\n\tПросмотр и содание подкатегорий\n");
+                                Console.WriteLine("\n\t1 - Просмотр перечня подкатегорий\n\t2 - Создать новую подкатегорию\n");
+                                int value = CheckValue(Console.ReadLine());
+                                if (value > 0)
+                                {
+                                    switch (value)
+                                    {
+                                        case 1:
+                                            //Выполняем просмотр существующих подкатегорий в соответсвии с категориями
+                                            subcategoryViewer.PrintingAllSubcategories(unitOfWork.Subcategories.GetAll<Subcategory>().ToList(), unitOfWork.Categories.GetAll<Category>().ToList());
+                                            //categoryViewer.PrintingСategories(unitOfWork.Categories.GetAll<Category>().ToList());
+                                            break;
+                                        case 2:
+                                            //Создаем и добавляем новую категорию
+                                            unitOfWork.Subcategories.Add(subcategoryController.CreateSubcategory(unitOfWork.Subcategories.GetAll<Subcategory>().ToList()));
+                                            //unitOfWork.Categories.Add(categoryController.CreateCategory(unitOfWork.Categories.GetAll<Category>().ToList()));
+                                            break;
+                                    }
+                                }
+                                Console.WriteLine("\n\tДля дальнейшего просмотра и содания подкатегорий нажмите - 'Enter'" +
+                                "\n\tДля выхода в главное меню - 'e'\n");
+                                keyPress = Console.ReadKey();
+                            } while (keyPress.KeyChar != 'e');
+                            Console.Clear();
+                            ProvidingOptions();
+                            break;
+                        case 6:
                             Console.WriteLine("\n\tВыполняется сохранение данных\n");
                             unitOfWork.Commit();
                             Console.Clear();
                             ProvidingOptions();
                             break;
-                        case 6:
+                        case 7:
                             Console.WriteLine("\n\tОсуществляется выход из программы!\n");
                             Environment.Exit(0);
                             break;

@@ -1,4 +1,5 @@
 ﻿
+using BookOfRecipes.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,16 +9,17 @@ namespace BookOfRecipes
 {
     class UnitOfWork : IDisposable, IUnitOfWork
     {
-        ContextEntity contextEntity; 
+        ContextEntity contextEntity;
+        RepositoryIngredient repositoryIngredient;
+        RepositoryRecipe repositoryRecipe;
         RepositoryCategory repositoryCategory;
-        RepositoryIngredient repositoryIngredient; 
-        RepositoryRecipe repositoryRecipe; 
+        RepositorySubcategory repositorySubcategory;
 
         public UnitOfWork(ContextEntity contextEntity)
         {
             this.contextEntity = contextEntity;
         }
-        public RepositoryCategory GetCategory
+        public RepositoryCategory Categories
         {
             get
             {
@@ -26,7 +28,7 @@ namespace BookOfRecipes
                 return repositoryCategory;
             }
         }
-        public RepositoryIngredient GetIngredient
+        public RepositoryIngredient Ingredients
         {
             get
             {
@@ -35,7 +37,7 @@ namespace BookOfRecipes
                 return repositoryIngredient;
             }
         }
-        public RepositoryRecipe GetRecipe
+        public RepositoryRecipe Recipes
         {
             get
             {
@@ -44,18 +46,20 @@ namespace BookOfRecipes
                 return repositoryRecipe;
             }
         }
+        public RepositorySubcategory Subcategories
+        {
+            get
+            {
+                if (repositorySubcategory == null)
+                    repositorySubcategory = new RepositorySubcategory(contextEntity);
+                return repositorySubcategory;
+            }
+        }
         public void Commit()
         {
             contextEntity.SaveChanges();
         }
-
-        UnitOfWork IUnitOfWork.GetLink()
-        {
-            UnitOfWork unitOfWork = new UnitOfWork(contextEntity);
-            return unitOfWork;
-        }
         private bool disposed = false;
- 
         public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -67,7 +71,6 @@ namespace BookOfRecipes
                 this.disposed = true;
             }
         }
-
         public void Dispose()
         {
             Dispose(true);

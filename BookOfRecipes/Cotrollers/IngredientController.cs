@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Linq;
 
 namespace BookOfRecipes
 {
-    class IngredientController
+    class IngredientController : IIngredientController
     {
-        //Метод для добавления захардкоженных ингридиентов 
+        //Метод для добавления захардкоженных ингредиентов 
         public List<Ingredient> CreateIngredients()
         {
             string[] listIngredients = { "айва", "сахар","вода","лимона","молоко","сметана","яйцо","сливочное масло","ванильный сахар","соль","муки",
@@ -19,7 +20,7 @@ namespace BookOfRecipes
             List<Ingredient> ingridient = new List<Ingredient>(listIngredients.Length);
             for (int i = 0; i < listIngredients.Length; i++)
             {
-                ingridient.Add(new Ingredient { Id = i + 1, NameIngredient = listIngredients[i] });
+                ingridient.Add(new Ingredient { Id = i + 1, Name = listIngredients[i] });
             }
             return ingridient;
         }
@@ -30,9 +31,9 @@ namespace BookOfRecipes
             string userMessage = "Введите имя ингредиента: ";
             Console.WriteLine("\n\t{0}:", userMessage);
             string newIngredient = Console.ReadLine();
-            if (!string.IsNullOrEmpty(newIngredient) && !modelIngredients.Exists(x => x.NameIngredient == newIngredient))
+            if (!string.IsNullOrEmpty(newIngredient) && !modelIngredients.Exists(x => x.Name == newIngredient))
             {
-                modelIngredient = new Ingredient() { Id = modelIngredients.Count + 1, NameIngredient = newIngredient };
+                modelIngredient = new Ingredient() { Id = modelIngredients.Count + 1, Name = newIngredient };
                 return modelIngredient;
             }
             else
@@ -41,10 +42,10 @@ namespace BookOfRecipes
                 return modelIngredient;
             }
         }
-        //Метод для формирования списка выбранных индексов ингридиентов пользователем
+        //Метод для формирования списка выбранных индексов ингредиентов пользователем
         public List<int> FormationListIndices(List<Ingredient> modelIngredients)
         {
-            Console.WriteLine("\n\tНеобходимо указать номер ингридиента. По окончанию формирования списка введите - 'e'" +
+            Console.WriteLine("\n\tНеобходимо указать номер ингредиента. По окончанию формирования списка введите - 'e'" +
                    "\n\tВведите номер:\n");
             List<int> ingredientIndices = new List<int>();
             for (int i = 0; i < modelIngredients.Count; i++)
@@ -61,7 +62,7 @@ namespace BookOfRecipes
                 }
                 else
                 {
-                    Console.WriteLine("\n\tВведен неверный индекс ингридиента!");
+                    Console.WriteLine("\n\tВведен неверный индекс ингредиента!");
                     i--;
                     continue;
                 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BookOfRecipes
 {
-    class CategoryViewer: ICategoryViewer
+    class CategoryViewer : ICategoryViewer
     {
         public void PrintingСategories(List<Category> modelCategories)
         {
@@ -15,20 +15,13 @@ namespace BookOfRecipes
                 //Выводим имеющиеся категории
                 for (int i = 0; i < modelCategories.Count; i++)
                 {
-                    Console.WriteLine("\n\t{0} - {1}", modelCategories[i].Id, modelCategories[i].NameCategory);
+                    Console.WriteLine("\n\t{0} - {1}", modelCategories[i].Id, modelCategories[i].Name);
                 }
             }
             else
             {
                 Console.WriteLine("В данном листе нет категорий");
             }
-
-        }
-        CategoryViewer ICategoryViewer.GetLink()
-        {
-            CategoryViewer categoryViewer=new CategoryViewer();
-            return categoryViewer;
         }
     }
-
 }

@@ -6,6 +6,6 @@ namespace BookOfRecipes.Interfaces
 {
     interface IIngridientViewer
     {
-        IngridientViewer GetLink();
+        void PrintIngridient(List<Ingredient> modelIngredients);
     }
 }

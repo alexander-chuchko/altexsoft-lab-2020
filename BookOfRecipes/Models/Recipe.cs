@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +7,12 @@ using System.Linq;
 namespace BookOfRecipes
 {
     [Serializable]
-    class Recipe : EntityBase
+    class Recipe : EntityBase, ISaveble
     {
-        public string NameRecept { get; set; }
-        public string RecipeDescription { get; set; }
-        public List<string> RecipeSteps { get; set; }
+        public string Description { get; set; }
+        public List<string> Steps { get; set; }
         public List<int> IdIngredient { get; set; }
         public int IdСategory { get; set; }
+        public int? IdSubcategory { get; set; }
     }
 }

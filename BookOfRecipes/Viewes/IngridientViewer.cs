@@ -7,13 +7,8 @@ using System.Linq;
 
 namespace BookOfRecipes
 {
-    class IngridientViewer: IIngridientViewer
+    class IngridientViewer : IIngridientViewer
     {
-        IngridientViewer IIngridientViewer.GetLink()
-        {
-            IngridientViewer ingridientViewer = new IngridientViewer();
-            return ingridientViewer;
-        }
         //Метод выводит список ингредиентов на консоль
         public void PrintIngridient(List<Ingredient> modelIngredients)
         {
@@ -21,7 +16,7 @@ namespace BookOfRecipes
             {
                 for (int i = 0; i < modelIngredients.Count; i++)
                 {
-                    Console.WriteLine("\n\t{0} - {1}", modelIngredients[i].Id, modelIngredients[i].NameIngredient);
+                    Console.WriteLine("\n\t{0} - {1}", modelIngredients[i].Id, modelIngredients[i].Name);
                 }
             }
             else

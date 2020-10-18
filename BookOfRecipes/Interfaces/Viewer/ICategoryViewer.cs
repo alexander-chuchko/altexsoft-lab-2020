@@ -6,6 +6,6 @@ namespace BookOfRecipes.Interfaces
 {
     interface ICategoryViewer
     {
-        CategoryViewer GetLink();
+        void PrintingСategories(List<Category> modelCategories);
     }
 }

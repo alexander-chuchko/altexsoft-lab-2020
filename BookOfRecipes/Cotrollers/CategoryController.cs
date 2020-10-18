@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BookOfRecipes.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace BookOfRecipes
 {
-    class CategoryController
+    class CategoryController : ICategoryController
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -20,7 +21,7 @@ namespace BookOfRecipes
             List<Category> categories = new List<Category>(listСategories.Length);
             for (int i = 0; i < listСategories.Length; i++)
             {
-                categories.Add(new Category { Id = i + 1, NameCategory = listСategories[i] });
+                categories.Add(new Category { Id = i + 1, Name = listСategories[i] });
             }
             return categories;
         }
@@ -30,9 +31,9 @@ namespace BookOfRecipes
             Category modelCategory = null;
             Console.WriteLine("\n\tВведите название категории:\n");
             string input = Console.ReadLine();
-            if (!modelCategories.Exists(x => x.NameCategory == input && string.IsNullOrEmpty(input)))
+            if (!modelCategories.Exists(x => x.Name == input && string.IsNullOrEmpty(input)))
             {
-                modelCategory = new Category() { NameCategory = input, Id = modelCategories.Count };
+                modelCategory = new Category() { Name = input, Id = modelCategories.Count + 1 };
             }
             return modelCategory;
         }
@@ -41,10 +42,10 @@ namespace BookOfRecipes
         public int CheckingCategoryIndex()
         {
             Console.WriteLine("\n\tВыбирите номер категории");
-            for (int i = 0; i < unitOfWork.GetLink().GetCategory.GetAll().ToList().Count; i++)
+            for (int i = 0; i < unitOfWork.Categories.GetAll<Category>().ToList().Count; i++)
             {
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out int result) && unitOfWork.GetLink().GetCategory.GetAll().ToList().Count >= result && unitOfWork.GetLink().GetCategory.GetAll().ToList().Count > 0)
+                if (int.TryParse(input, out int result) && unitOfWork.Categories.GetAll<Category>().ToList().Count >= result && unitOfWork.Categories.GetAll<Category>().ToList().Count > 0)
                 {
                     return result;
                 }
