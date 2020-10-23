@@ -145,8 +145,6 @@ insert into RecipeStep(RecipeId, StepId) values(9,148)
 insert into RecipeStep(RecipeId, StepId) values(9,69)
 insert into RecipeStep(RecipeId, StepId) values(9,114)
 
---конец--
-
 --Заполняем таблицу RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(10,30)
 insert into RecipeStep(RecipeId, StepId) values(10,20)
@@ -184,4 +182,3 @@ insert into RecipeStep(RecipeId, StepId) values(12,156)
 insert into RecipeStep(RecipeId, StepId) values(12,121)
 insert into RecipeStep(RecipeId, StepId) values(12,138)
 insert into RecipeStep(RecipeId, StepId) values(12,118)
---конец--

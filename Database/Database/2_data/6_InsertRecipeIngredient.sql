@@ -30,7 +30,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(4,1)
 insert into RecipeIngredient(RecipeId, IngredientId) values(4,37)
 insert into RecipeIngredient(RecipeId, IngredientId) values(4,2)
 
-
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(5,22)
 insert into RecipeIngredient(RecipeId, IngredientId) values(5,43)
@@ -41,7 +40,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(5,38)
 insert into RecipeIngredient(RecipeId, IngredientId) values(5,60)
 insert into RecipeIngredient(RecipeId, IngredientId) values(5,24)
 insert into RecipeIngredient(RecipeId, IngredientId) values(5,6)
-
 
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(6,22)
@@ -55,7 +53,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(6,30)
 insert into RecipeIngredient(RecipeId, IngredientId) values(6,2)
 insert into RecipeIngredient(RecipeId, IngredientId) values(6,20)
 
-
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(7,4)
 insert into RecipeIngredient(RecipeId, IngredientId) values(7,2)
@@ -63,7 +60,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(7,45)
 insert into RecipeIngredient(RecipeId, IngredientId) values(7,37)
 insert into RecipeIngredient(RecipeId, IngredientId) values(7,30)
 insert into RecipeIngredient(RecipeId, IngredientId) values(7,18)
-
 
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(8,4)
@@ -89,7 +85,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(9,24)
 insert into RecipeIngredient(RecipeId, IngredientId) values(9,45)
 insert into RecipeIngredient(RecipeId, IngredientId) values(9,29)
 
-
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(10,24)
 insert into RecipeIngredient(RecipeId, IngredientId) values(10,37)
@@ -101,7 +96,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(10,33)
 insert into RecipeIngredient(RecipeId, IngredientId) values(10,12)
 insert into RecipeIngredient(RecipeId, IngredientId) values(10,45)
 
-
 --Заполняем таблицу RecipeIngredient
 insert into RecipeIngredient(RecipeId, IngredientId) values(11,23)
 insert into RecipeIngredient(RecipeId, IngredientId) values(11,14)
@@ -111,7 +105,6 @@ insert into RecipeIngredient(RecipeId, IngredientId) values(11,37)
 insert into RecipeIngredient(RecipeId, IngredientId) values(11,59)
 insert into RecipeIngredient(RecipeId, IngredientId) values(11,29)
 insert into RecipeIngredient(RecipeId, IngredientId) values(11,45)
-
 
 insert into RecipeIngredient(RecipeId, IngredientId) values(12,55)
 insert into RecipeIngredient(RecipeId, IngredientId) values(12,31)
