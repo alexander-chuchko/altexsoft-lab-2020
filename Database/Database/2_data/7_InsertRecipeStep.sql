@@ -1,4 +1,4 @@
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(1,73)
 insert into RecipeStep(RecipeId, StepId) values(1,32)
 insert into RecipeStep(RecipeId, StepId) values(1,124)
@@ -14,7 +14,7 @@ insert into RecipeStep(RecipeId, StepId) values(1,102)
 insert into RecipeStep(RecipeId, StepId) values(1,46)
 insert into RecipeStep(RecipeId, StepId) values(1,130)
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(2,76)
 insert into RecipeStep(RecipeId, StepId) values(2,134)
 insert into RecipeStep(RecipeId, StepId) values(2,112)
@@ -25,8 +25,9 @@ insert into RecipeStep(RecipeId, StepId) values(2,139)
 insert into RecipeStep(RecipeId, StepId) values(2,101)
 insert into RecipeStep(RecipeId, StepId) values(2,140)
 insert into RecipeStep(RecipeId, StepId) values(2,115)
+--РЎРѕСЃРёСЃРєРё РІ Р»Р°РІР°С€Рµ РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(3,127)
 insert into RecipeStep(RecipeId, StepId) values(3,151)
 insert into RecipeStep(RecipeId, StepId) values(3,96)
@@ -42,8 +43,9 @@ insert into RecipeStep(RecipeId, StepId) values(3,41)
 insert into RecipeStep(RecipeId, StepId) values(3,64)
 insert into RecipeStep(RecipeId, StepId) values(3,123)
 insert into RecipeStep(RecipeId, StepId) values(3,81)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(4,22)
 insert into RecipeStep(RecipeId, StepId) values(4,133)
 insert into RecipeStep(RecipeId, StepId) values(4,2)
@@ -54,8 +56,9 @@ insert into RecipeStep(RecipeId, StepId) values(4,12)
 insert into RecipeStep(RecipeId, StepId) values(4,62)
 insert into RecipeStep(RecipeId, StepId) values(4,24)
 insert into RecipeStep(RecipeId, StepId) values(4,58)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(5,159)
 insert into RecipeStep(RecipeId, StepId) values(5,16)
 insert into RecipeStep(RecipeId, StepId) values(5,136)
@@ -68,8 +71,9 @@ insert into RecipeStep(RecipeId, StepId) values(5,35)
 insert into RecipeStep(RecipeId, StepId) values(5,110)
 insert into RecipeStep(RecipeId, StepId) values(5,70)
 insert into RecipeStep(RecipeId, StepId) values(5,26)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(6,129)
 insert into RecipeStep(RecipeId, StepId) values(6,38)
 insert into RecipeStep(RecipeId, StepId) values(6,135)
@@ -84,13 +88,13 @@ insert into RecipeStep(RecipeId, StepId) values(6,123)
 insert into RecipeStep(RecipeId, StepId) values(6,90)
 insert into RecipeStep(RecipeId, StepId) values(6,113)
 insert into RecipeStep(RecipeId, StepId) values(6,40)
-insert into RecipeStep(RecipeId, StepId) values(6,90)
 insert into RecipeStep(RecipeId, StepId) values(6,88)
 insert into RecipeStep(RecipeId, StepId) values(6,36)
 insert into RecipeStep(RecipeId, StepId) values(6,54)
 insert into RecipeStep(RecipeId, StepId) values(6,49)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(7,119)
 insert into RecipeStep(RecipeId, StepId) values(7,17)
 insert into RecipeStep(RecipeId, StepId) values(7,6)
@@ -106,8 +110,9 @@ insert into RecipeStep(RecipeId, StepId) values(7,93)
 insert into RecipeStep(RecipeId, StepId) values(7,84)
 insert into RecipeStep(RecipeId, StepId) values(7,3)
 insert into RecipeStep(RecipeId, StepId) values(7,83)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(8,85)
 insert into RecipeStep(RecipeId, StepId) values(8,95)
 insert into RecipeStep(RecipeId, StepId) values(8,14)
@@ -122,8 +127,9 @@ insert into RecipeStep(RecipeId, StepId) values(8,126)
 insert into RecipeStep(RecipeId, StepId) values(8,53)
 insert into RecipeStep(RecipeId, StepId) values(8,13)
 insert into RecipeStep(RecipeId, StepId) values(8,50)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(9,116)
 insert into RecipeStep(RecipeId, StepId) values(9,23)
 insert into RecipeStep(RecipeId, StepId) values(9,61)
@@ -139,7 +145,9 @@ insert into RecipeStep(RecipeId, StepId) values(9,148)
 insert into RecipeStep(RecipeId, StepId) values(9,69)
 insert into RecipeStep(RecipeId, StepId) values(9,114)
 
---Заполняем таблицу RecipeStep
+--РєРѕРЅРµС†--
+
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(10,30)
 insert into RecipeStep(RecipeId, StepId) values(10,20)
 insert into RecipeStep(RecipeId, StepId) values(10,67)
@@ -153,8 +161,9 @@ insert into RecipeStep(RecipeId, StepId) values(10,5)
 insert into RecipeStep(RecipeId, StepId) values(10,99)
 insert into RecipeStep(RecipeId, StepId) values(10,125)
 insert into RecipeStep(RecipeId, StepId) values(10,145)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(11,65)
 insert into RecipeStep(RecipeId, StepId) values(11,97)
 insert into RecipeStep(RecipeId, StepId) values(11,45)
@@ -164,14 +173,15 @@ insert into RecipeStep(RecipeId, StepId) values(11,94)
 insert into RecipeStep(RecipeId, StepId) values(11,153)
 insert into RecipeStep(RecipeId, StepId) values(11,154)
 insert into RecipeStep(RecipeId, StepId) values(11,52)
-insert into RecipeStep(RecipeId, StepId) values(11,137)
 insert into RecipeStep(RecipeId, StepId) values(11,111)
 insert into RecipeStep(RecipeId, StepId) values(11,109)
+--РєРѕРЅРµС†--
 
---Заполняем таблицу RecipeStep
+--Р—Р°РїРѕР»РЅСЏРµРј С‚Р°Р±Р»РёС†Сѓ RecipeStep
 insert into RecipeStep(RecipeId, StepId) values(12,117)
 insert into RecipeStep(RecipeId, StepId) values(12,73)
 insert into RecipeStep(RecipeId, StepId) values(12,156)
 insert into RecipeStep(RecipeId, StepId) values(12,121)
 insert into RecipeStep(RecipeId, StepId) values(12,138)
 insert into RecipeStep(RecipeId, StepId) values(12,118)
+--РєРѕРЅРµС†--
