@@ -1,13 +1,14 @@
-WITH RecursiveQuery(id, ParentId, Name) AS
-	(
-		select categories.Id, categories.ParentId, categories.Name 
-		from Categories categories
-		where categories.Id=3
-		union all
-		select categories.Id, categories.ParentId, categories.Name 
-		from Categories categories
-		join RecursiveQuery rq on categories.ParentId=rq.Id
-	)		
+WITH RecursiveQuery(id, ParentId, Name) 
+AS
+(
+	select categories.Id, categories.ParentId, categories.Name 
+	from Categories categories
+	where categories.Id=3
+	union all
+	select categories.Id, categories.ParentId, categories.Name 
+	from Categories categories
+	join RecursiveQuery rq on categories.ParentId=rq.Id
+)		
 SELECT categories.Name as Category, recieps.Name as NameReciept, ingredient.Name as Ingredient 
 FROM  Recipes recieps
 JOIN RecipeIngredient ri ON recieps.Id = ri.RecipeId
